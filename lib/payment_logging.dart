@@ -212,11 +212,15 @@ class _PaymentLoggingScreenState extends State<PaymentLoggingScreen> {
                                   Icons.receipt_long,
                                 ),
                                 value: selectedInvoiceId,
+                                isExpanded: true,
                                 items: invoices.map((doc) {
                                   final clientname = doc.id;
                                   return DropdownMenuItem(
                                     value: doc.id,
-                                    child: Text('Invoice: $clientname'),
+                                    child: Text(
+                                      'Invoice: $clientname',
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   );
                                 }).toList(),
                                 onChanged: (val) {
@@ -246,10 +250,14 @@ class _PaymentLoggingScreenState extends State<PaymentLoggingScreen> {
                                   Icons.payment,
                                 ),
                                 value: paymentMethod,
+                                isExpanded: true,
                                 items: methods.map((method) {
                                   return DropdownMenuItem(
                                     value: method,
-                                    child: Text(method),
+                                    child: Text(
+                                      method,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   );
                                 }).toList(),
                                 onChanged: (val) => setState(() => paymentMethod = val!),
@@ -307,14 +315,17 @@ class _PaymentLoggingScreenState extends State<PaymentLoggingScreen> {
       children: [
         Icon(icon, size: 20, color: Colors.grey[600]),
         SizedBox(width: 8),
-        Text(
-          label,
-          style: TextStyle(
-            color: Colors.grey[600],
-            fontSize: 14,
+        Expanded(
+          child: Text(
+            label,
+            style: TextStyle(
+              color: Colors.grey[600],
+              fontSize: 14,
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
-        Spacer(),
+        SizedBox(width: 12),
         Text(
           value,
           style: TextStyle(

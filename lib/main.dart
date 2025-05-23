@@ -106,13 +106,7 @@ class _MainHomeState extends State<MainHome> {
     InvoiceSummaryReportScreen(),
   ];
 
-  final List<String> _titles = [
-    'Log Payment',
-    'Generate Receipt',
-    'Invoice Status',
-    'Payment History',
-    'Invoice Summary',
-  ];
+ 
 
   @override
   Widget build(BuildContext context) {

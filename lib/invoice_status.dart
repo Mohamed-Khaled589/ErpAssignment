@@ -165,13 +165,17 @@ class _InvoiceStatusTrackingScreenState
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'Invoice #${doc.id}',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                                  Expanded(
+                                    child: Text(
+                                      'Invoice #${doc.id}',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
+                                  SizedBox(width: 12),
                                   Container(
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 12, vertical: 6),
@@ -190,16 +194,41 @@ class _InvoiceStatusTrackingScreenState
                                 ],
                               ),
                               SizedBox(height: 16),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  _buildAmountInfo('Total', totalAmount,
-                                      Colors.blue.shade900),
-                                  _buildAmountInfo(
-                                      'Paid', paidAmount, Colors.green.shade700),
-                                  _buildAmountInfo('Remaining', remainingAmount,
-                                      Colors.red.shade700),
-                                ],
+                              IntrinsicHeight(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: _buildAmountInfo(
+                                        'Total',
+                                        totalAmount,
+                                        Colors.blue.shade900,
+                                      ),
+                                    ),
+                                    VerticalDivider(
+                                      color: Colors.grey[300],
+                                      thickness: 1,
+                                    ),
+                                    Expanded(
+                                      child: _buildAmountInfo(
+                                        'Paid',
+                                        paidAmount,
+                                        Colors.green.shade700,
+                                      ),
+                                    ),
+                                    VerticalDivider(
+                                      color: Colors.grey[300],
+                                      thickness: 1,
+                                    ),
+                                    Expanded(
+                                      child: _buildAmountInfo(
+                                        'Remaining',
+                                        remainingAmount,
+                                        Colors.red.shade700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

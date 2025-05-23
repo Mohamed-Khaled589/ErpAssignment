@@ -397,23 +397,29 @@ class _InvoiceSummaryReportScreenState extends State<InvoiceSummaryReportScreen>
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      _getStatusIcon(status),
-                                      color: _getStatusColor(status),
-                                      size: 20,
-                                    ),
-                                    SizedBox(width: 8),
-                                    Text(
-                                      'Invoice #${doc.id}',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        _getStatusIcon(status),
+                                        color: _getStatusColor(status),
+                                        size: 20,
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(width: 8),
+                                      Flexible(
+                                        child: Text(
+                                          'Invoice #${doc.id}',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
+                                SizedBox(width: 12),
                                 Container(
                                   padding: EdgeInsets.symmetric(
                                     horizontal: 12,
@@ -444,14 +450,17 @@ class _InvoiceSummaryReportScreenState extends State<InvoiceSummaryReportScreen>
                                     Icon(Icons.person_outline,
                                         size: 20, color: Colors.grey[600]),
                                     SizedBox(width: 8),
-                                    Text(
-                                      clientId,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.grey[800],
+                                    Expanded(
+                                      child: Text(
+                                        clientId,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.grey[800],
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
-                                    Spacer(),
+                                    SizedBox(width: 16),
                                     Icon(Icons.calendar_today,
                                         size: 20, color: Colors.grey[600]),
                                     SizedBox(width: 8),
@@ -513,25 +522,40 @@ class _InvoiceSummaryReportScreenState extends State<InvoiceSummaryReportScreen>
                                   ],
                                 ),
                                 SizedBox(height: 16),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    _buildAmountColumn(
-                                      'Total',
-                                      total,
-                                      _getStatusColor(status),
-                                    ),
-                                    _buildAmountColumn(
-                                      'Paid',
-                                      paid,
-                                      _getStatusColor(status),
-                                    ),
-                                    _buildAmountColumn(
-                                      'Remaining',
-                                      total - paid,
-                                      _getStatusColor(status),
-                                    ),
-                                  ],
+                                IntrinsicHeight(
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: _buildAmountColumn(
+                                          'Total',
+                                          total,
+                                          _getStatusColor(status),
+                                        ),
+                                      ),
+                                      VerticalDivider(
+                                        color: Colors.grey[300],
+                                        thickness: 1,
+                                      ),
+                                      Expanded(
+                                        child: _buildAmountColumn(
+                                          'Paid',
+                                          paid,
+                                          _getStatusColor(status),
+                                        ),
+                                      ),
+                                      VerticalDivider(
+                                        color: Colors.grey[300],
+                                        thickness: 1,
+                                      ),
+                                      Expanded(
+                                        child: _buildAmountColumn(
+                                          'Remaining',
+                                          total - paid,
+                                          _getStatusColor(status),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
