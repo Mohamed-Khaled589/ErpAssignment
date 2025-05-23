@@ -54,15 +54,24 @@ class _PaymentLoggingScreenState extends State<PaymentLoggingScreen> {
       if (!invoiceSnapshot.exists) throw Exception("Invoice not found");
 
       final currentPaid = (invoiceSnapshot.get('paidAmount') ?? 0).toDouble();
+      final newPaidAmount = currentPaid + amount;
+      final totalAmount = (invoiceSnapshot.get('totalAmount') ?? 0).toDouble();
 
       transaction.set(
         FirebaseFirestore.instance.collection('payments').doc(),
         paymentData,
       );
 
-      transaction.update(invoiceRef, {
-        'paidAmount': currentPaid + amount,
-      });
+      final updateData = {
+        'paidAmount': newPaidAmount,
+      };
+
+      // Update status to "Paid" if the full amount is paid
+      if (newPaidAmount >= totalAmount) {
+        updateData['status'] = 'Paid';
+      }
+
+      transaction.update(invoiceRef, updateData);
     });
 
     amountController.clear();
